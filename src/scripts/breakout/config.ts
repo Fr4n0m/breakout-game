@@ -42,15 +42,15 @@ export type BallDifficultySettings = {
 
 export const CONFIG = {
     canvas: { width: 448, height: 400 },
-    paddle: { scale: 0.2, sensitivity: 8, marginBottom: 10 },
+    paddle: { scale: 0.2, sensitivity: 4, marginBottom: 10 },
     ball: { scale: 0.2, initialSpeed: 3, minSpeed: 1, maxSpeed: 10, speedIncrement: 0.02 },
     bricks: { rows: 7, columns: 7, padding: 2, offsetTop: 20, offsetLeft: 15, scale: 0.15 }
 } as const;
 
 export const DIFFICULTY_PRESETS: Record<Difficulty, BallDifficultySettings> = {
-    easy: { initialSpeed: 2.3, speedIncrement: 0.01, maxSpeed: 7 },
-    normal: { initialSpeed: 3, speedIncrement: 0.02, maxSpeed: 10 },
-    hard: { initialSpeed: 3.8, speedIncrement: 0.03, maxSpeed: 13 }
+    easy: { initialSpeed: 1.5, speedIncrement: 0.004, maxSpeed: 5 },
+    normal: { initialSpeed: 1.8, speedIncrement: 0.005, maxSpeed: 5.5 },
+    hard: { initialSpeed: 2.3, speedIncrement: 0.008, maxSpeed: 7 }
 };
 
 export const BRICK_STATUS = { ACTIVE: 1, HIT: 2, DESTROYED: 0 } as const;
