@@ -12,6 +12,8 @@ import { createDimensions, createInitialState, type Dimensions, type GameState }
 
 type GameOptions = {
     difficulty?: Difficulty;
+    forceWinOnStart?: boolean;
+    onWin?: () => void;
 };
 
 function clampSpeedWithDirection(value: number, min: number, max: number): number {
@@ -40,6 +42,7 @@ export function createBreakoutGame(
 
     const dimensions: Dimensions = createDimensions(SPRITES);
     const state: GameState = createInitialState(canvas, dimensions, gameConfig.ball);
+    let hasTriggeredWinEffect = false;
 
     function drawSprite(spriteKey: SpriteKey, x: number, y: number, width: number, height: number): void {
         const sprite = SPRITES[spriteKey];
@@ -234,11 +237,19 @@ export function createBreakoutGame(
             return;
         }
 
+        if (state.game.isWon && !hasTriggeredWinEffect) {
+            hasTriggeredWinEffect = true;
+            options.onWin?.();
+        }
         drawEndScreen();
     }
 
     function start(): void {
         initEvents();
+        if (options.forceWinOnStart || !hasRemainingBricks()) {
+            state.game.isOver = true;
+            state.game.isWon = true;
+        }
         loop();
     }
 

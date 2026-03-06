@@ -5,9 +5,17 @@ type InitBreakoutGameParams = {
     canvasSelector: string;
     spriteSelector: string;
     difficulty?: Difficulty;
+    forceWinOnStart?: boolean;
+    onWin?: () => void;
 };
 
-export function initBreakoutGame({ canvasSelector, spriteSelector, difficulty = "normal" }: InitBreakoutGameParams): void {
+export function initBreakoutGame({
+    canvasSelector,
+    spriteSelector,
+    difficulty = "normal",
+    forceWinOnStart = false,
+    onWin
+}: InitBreakoutGameParams): void {
     const canvas = document.querySelector<HTMLCanvasElement>(canvasSelector);
     const spriteSheet = document.querySelector<HTMLImageElement>(spriteSelector);
     const ctx = canvas?.getContext("2d");
@@ -17,7 +25,7 @@ export function initBreakoutGame({ canvasSelector, spriteSelector, difficulty = 
     }
 
     const startGame = (): void => {
-        const game = createBreakoutGame(canvas, ctx, spriteSheet, { difficulty });
+        const game = createBreakoutGame(canvas, ctx, spriteSheet, { difficulty, forceWinOnStart, onWin });
         game.start();
     };
 
