@@ -1,6 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
+---
+---
 
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,10 +34,10 @@
 
 <img id="title" src="/BreakOutTitle.png" alt="Arcade Breakout">
 
-<img hidden id="sprite" src="/Breakout_Tile_Free.png" alt="Breakout sprite">
+<img hidden id="sprite" src="/Breakout_Tile_Free.png" alt="Breakout sprite" loading="eager" decoding="sync">
 
-<script type="module">
-    import { initBreakoutGame } from "/js/breakout/index.js";
+<script>
+    import { initBreakoutGame } from "../scripts/breakout/index.js";
 
     initBreakoutGame({
         canvasSelector: "#game-canvas",

@@ -9,6 +9,15 @@ export function initBreakoutGame({ canvasSelector, spriteSelector }) {
         throw new Error("Breakout initialization failed: canvas, sprite or context is missing.");
     }
 
-    const game = createBreakoutGame(canvas, ctx, spriteSheet);
-    game.start();
+    const startGame = () => {
+        const game = createBreakoutGame(canvas, ctx, spriteSheet);
+        game.start();
+    };
+
+    if (spriteSheet.complete && spriteSheet.naturalWidth > 0) {
+        startGame();
+        return;
+    }
+
+    spriteSheet.addEventListener("load", startGame, { once: true });
 }
