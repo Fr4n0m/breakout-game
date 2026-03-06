@@ -1,5 +1,6 @@
 import type { Difficulty } from "../breakout/config";
 import { initBreakoutGame } from "../breakout/index";
+import { launchWinFireworks } from "./winEffects";
 
 const MENU_SELECTOR = "#difficulty-menu";
 const BUTTON_SELECTOR = "[data-difficulty]";
@@ -9,7 +10,6 @@ export function setupDifficultyMenu(): void {
     const difficultyButtons = Array.from(document.querySelectorAll<HTMLButtonElement>(BUTTON_SELECTOR));
 
     if (!difficultyMenu || !difficultyButtons.length) return;
-
     let activeIndex = difficultyButtons.findIndex((button) => button.dataset.difficulty === "normal");
     if (activeIndex < 0) activeIndex = 0;
 
@@ -26,7 +26,8 @@ export function setupDifficultyMenu(): void {
         initBreakoutGame({
             canvasSelector: "#game-canvas",
             spriteSelector: "#sprite",
-            difficulty
+            difficulty,
+            onWin: launchWinFireworks
         });
         difficultyMenu.style.display = "none";
     };
