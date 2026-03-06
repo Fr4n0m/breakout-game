@@ -29,6 +29,7 @@ body {
 .menu-overlay {
     position: absolute;
     inset: 0;
+    padding: 3px 3px 0;
     display: flex;
     flex-direction: column;
     align-items: stretch;
