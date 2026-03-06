@@ -79,13 +79,26 @@ export function createBreakoutGame(
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    function drawGameOver(): void {
+    function drawEndScreen(): void {
+        const title = state.game.isWon ? "You Win!" : "Game Over";
+        const subtitle = state.game.isWon ? "Press any key to play again" : "Press any key to restart";
         ctx.font = "24px Arial";
         ctx.fillStyle = "#fff";
         ctx.textAlign = "center";
-        ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+        ctx.fillText(title, canvas.width / 2, canvas.height / 2);
         ctx.font = "16px Arial";
-        ctx.fillText("Press any key to restart", canvas.width / 2, canvas.height / 2 + 30);
+        ctx.fillText(subtitle, canvas.width / 2, canvas.height / 2 + 30);
+    }
+
+    function hasRemainingBricks(): boolean {
+        for (let column = 0; column < CONFIG.bricks.columns; column++) {
+            for (let row = 0; row < CONFIG.bricks.rows; row++) {
+                if (state.bricks[column][row].status !== BRICK_STATUS.DESTROYED) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     function updateBrickCollisions(): void {
@@ -113,6 +126,11 @@ export function createBreakoutGame(
                     }
                 }
             }
+        }
+
+        if (!hasRemainingBricks()) {
+            state.game.isOver = true;
+            state.game.isWon = true;
         }
     }
 
@@ -155,6 +173,7 @@ export function createBreakoutGame(
             state.ball.y = state.paddle.y - state.ball.height;
         } else if (nextY > canvas.height - state.ball.height) {
             state.game.isOver = true;
+            state.game.isWon = false;
         }
 
         state.ball.x += state.ball.dx;
@@ -174,13 +193,16 @@ export function createBreakoutGame(
     }
 
     function onKeyDown(event: KeyboardEvent): void {
+        if (state.game.isOver) {
+            resetGame();
+            return;
+        }
+
         const { key } = event;
         if (KEY_BINDINGS.right.has(key)) {
             state.input.rightPressed = true;
         } else if (KEY_BINDINGS.left.has(key)) {
             state.input.leftPressed = true;
-        } else if (state.game.isOver) {
-            resetGame();
         }
     }
 
@@ -212,7 +234,7 @@ export function createBreakoutGame(
             return;
         }
 
-        drawGameOver();
+        drawEndScreen();
     }
 
     function start(): void {

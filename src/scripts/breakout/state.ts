@@ -28,6 +28,7 @@ type BallConfig = {
 export type GameState = {
     game: {
         isOver: boolean;
+        isWon: boolean;
         lastTime: number;
     };
     input: {
@@ -96,6 +97,7 @@ export function createInitialState(canvas: HTMLCanvasElement, dimensions: Dimens
     return {
         game: {
             isOver: false,
+            isWon: false,
             lastTime: performance.now()
         },
         input: {
