@@ -1,4 +1,6 @@
 ---
+import DifficultyMenu from "../components/DifficultyMenu.astro";
+import "../styles/game-page.css";
 ---
 
 <html lang="es">
@@ -8,231 +10,94 @@
     <title>Breakout con JS</title>
     <link rel="icon" type="image/jpg" href="/favicon.png" />
 </head>
-
-<style>
-    html,
-    body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    body {
-        overflow: hidden;
-        display: grid;
-        place-items: center;
-        background:
-            radial-gradient(circle at 20% 15%, rgba(111, 233, 255, 0.16), transparent 32%),
-            radial-gradient(circle at 80% 20%, rgba(217, 76, 255, 0.18), transparent 34%),
-            linear-gradient(180deg, #060611 0%, #0b0a1f 52%, #080712 100%);
-    }
-
-    .game-shell {
-        width: min(92vw, calc(92vh * 1.12), 760px);
-    }
-
-    .game-stage {
-        width: 100%;
-        aspect-ratio: 448 / 400;
-        margin: 0 auto;
-        position: relative;
-    }
-
-    .menu-overlay {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 14px;
-        z-index: 2;
-        color: #fff;
-        font-family: Arial, sans-serif;
-        pointer-events: auto;
-    }
-
-    .menu-logo {
-        width: clamp(220px, 62%, 410px);
-        height: auto;
-        margin-bottom: 6px;
-        filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
-    }
-
-    .menu-title {
-        margin: 0;
-        font-size: clamp(16px, 2vw, 22px);
-        font-weight: 900;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        color: #e6f6ff;
-        text-shadow:
-            0 0 8px rgba(111, 233, 255, 0.75),
-            0 0 18px rgba(222, 92, 255, 0.65),
-            0 2px 6px rgba(0, 0, 0, 0.85);
-    }
-
-    .difficulty-buttons {
-        display: flex;
-        gap: 10px;
-    }
-
-    .difficulty-button {
-        min-width: clamp(90px, 18vw, 130px);
-        padding: clamp(8px, 1.2vw, 12px) clamp(10px, 1.8vw, 16px);
-        font-size: clamp(13px, 1.6vw, 16px);
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        border: 2px solid #9ff5ff;
-        border-radius: 8px;
-        background: linear-gradient(180deg, rgba(14, 18, 45, 0.88), rgba(37, 9, 56, 0.88));
-        color: #dff9ff;
-        cursor: pointer;
-        text-shadow: 0 0 6px rgba(88, 236, 255, 0.6);
-        box-shadow:
-            inset 0 0 10px rgba(101, 246, 255, 0.15),
-            0 0 12px rgba(173, 84, 255, 0.3);
-        transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease, border-color 120ms ease;
-    }
-
-    .difficulty-button:hover {
-        transform: translateY(-1px);
-        border-color: #ffffff;
-        background: linear-gradient(180deg, rgba(27, 32, 70, 0.92), rgba(62, 14, 96, 0.92));
-        box-shadow:
-            inset 0 0 12px rgba(130, 245, 255, 0.22),
-            0 0 18px rgba(149, 72, 255, 0.45);
-    }
-
-    .difficulty-button:focus-visible {
-        outline: none;
-        border-color: #ffffff;
-        box-shadow:
-            0 0 0 3px rgba(119, 231, 255, 0.32),
-            inset 0 0 12px rgba(130, 245, 255, 0.22),
-            0 0 18px rgba(149, 72, 255, 0.45);
-    }
-
-    .difficulty-button.active {
-        border-color: #ffffff;
-        background: linear-gradient(180deg, rgba(40, 55, 110, 0.94), rgba(96, 21, 145, 0.94));
-        transform: translateY(-1px);
-        box-shadow:
-            inset 0 0 14px rgba(171, 247, 255, 0.28),
-            0 0 22px rgba(175, 94, 255, 0.55);
-    }
-
-    canvas {
-        width: 100%;
-        height: 100%;
-        border: 3px solid #fff;
-        border-bottom: transparent;
-        background: url("/background2.avif") center / cover no-repeat;
-        margin: 0 auto;
-        display: block;
-        box-sizing: border-box;
-    }
-
-</style>
-
-<div class="game-shell">
-    <div class="game-stage">
-        <canvas id="game-canvas" width="448" height="400"></canvas>
-
-        <div id="difficulty-menu" class="menu-overlay">
-            <img class="menu-logo" src="/BreakOutTitle.png" alt="Arcade Breakout">
-            <p class="menu-title">Selecciona dificultad</p>
-            <div class="difficulty-buttons">
-                <button class="difficulty-button" type="button" data-difficulty="easy">Fácil</button>
-                <button class="difficulty-button" type="button" data-difficulty="normal">Normal</button>
-                <button class="difficulty-button" type="button" data-difficulty="hard">Difícil</button>
-            </div>
+<body>
+    <div class="game-shell">
+        <div class="game-stage">
+            <canvas id="game-canvas" width="448" height="400"></canvas>
+            <DifficultyMenu />
         </div>
     </div>
-</div>
 
-<img hidden id="sprite" src="/Breakout_Tile_Free.png" alt="Breakout sprite" loading="eager" decoding="sync">
+    <img hidden id="sprite" src="/Breakout_Tile_Free.png" alt="Breakout sprite" loading="eager" decoding="sync">
 
-<script>
-    import type { Difficulty } from "../scripts/breakout/config";
-    import { initBreakoutGame } from "../scripts/breakout/index";
+    <script>
+        import type { Difficulty } from "../scripts/breakout/config";
+        import { initBreakoutGame } from "../scripts/breakout/index";
 
-    const difficultyMenu = document.querySelector<HTMLDivElement>("#difficulty-menu");
-    const difficultyButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-difficulty]"));
-    let activeIndex = 1;
+        const difficultyMenu = document.querySelector<HTMLDivElement>("#difficulty-menu");
+        const difficultyButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-difficulty]"));
 
-    function syncActiveButton() {
-        difficultyButtons.forEach((button, index) => {
-            const isActive = index === activeIndex;
-            button.classList.toggle("active", isActive);
-            button.setAttribute("aria-pressed", String(isActive));
-            if (isActive) button.focus();
-        });
-    }
+        if (difficultyMenu && difficultyButtons.length) {
+            let activeIndex = difficultyButtons.findIndex((button) => button.dataset.difficulty === "normal");
+            if (activeIndex < 0) activeIndex = 0;
 
-    function startGameWithDifficulty(difficulty: Difficulty) {
-        initBreakoutGame({
-            canvasSelector: "#game-canvas",
-            spriteSelector: "#sprite",
-            difficulty
-        });
+            const syncActiveButton = (): void => {
+                difficultyButtons.forEach((button, index) => {
+                    const isActive = index === activeIndex;
+                    button.classList.toggle("active", isActive);
+                    button.setAttribute("aria-pressed", String(isActive));
+                    if (isActive) button.focus();
+                });
+            };
 
-        if (difficultyMenu) {
-            difficultyMenu.style.display = "none";
-        }
-    }
+            const startGameWithDifficulty = (difficulty: Difficulty): void => {
+                initBreakoutGame({
+                    canvasSelector: "#game-canvas",
+                    spriteSelector: "#sprite",
+                    difficulty
+                });
+                difficultyMenu.style.display = "none";
+            };
 
-    difficultyButtons.forEach((button, index) => {
-        button.addEventListener("click", () => {
-            const difficulty = button.dataset.difficulty as Difficulty | undefined;
-            if (!difficulty) return;
-            activeIndex = index;
+            difficultyButtons.forEach((button, index) => {
+                button.addEventListener("click", () => {
+                    const difficulty = button.dataset.difficulty as Difficulty | undefined;
+                    if (!difficulty) return;
+                    activeIndex = index;
+                    syncActiveButton();
+                    startGameWithDifficulty(difficulty);
+                });
+            });
+
+            difficultyMenu.addEventListener("keydown", (event: KeyboardEvent) => {
+                if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+                    event.preventDefault();
+                    activeIndex = (activeIndex + 1) % difficultyButtons.length;
+                    syncActiveButton();
+                    return;
+                }
+
+                if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+                    event.preventDefault();
+                    activeIndex = (activeIndex - 1 + difficultyButtons.length) % difficultyButtons.length;
+                    syncActiveButton();
+                    return;
+                }
+
+                if (event.key === "Home") {
+                    event.preventDefault();
+                    activeIndex = 0;
+                    syncActiveButton();
+                    return;
+                }
+
+                if (event.key === "End") {
+                    event.preventDefault();
+                    activeIndex = difficultyButtons.length - 1;
+                    syncActiveButton();
+                    return;
+                }
+
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    const activeButton = difficultyButtons[activeIndex];
+                    const difficulty = activeButton?.dataset.difficulty as Difficulty | undefined;
+                    if (difficulty) startGameWithDifficulty(difficulty);
+                }
+            });
+
             syncActiveButton();
-            startGameWithDifficulty(difficulty);
-        });
-    });
-
-    difficultyMenu?.addEventListener("keydown", (event: KeyboardEvent) => {
-        if (!difficultyButtons.length) return;
-
-        if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-            event.preventDefault();
-            activeIndex = (activeIndex + 1) % difficultyButtons.length;
-            syncActiveButton();
-            return;
         }
-
-        if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-            event.preventDefault();
-            activeIndex = (activeIndex - 1 + difficultyButtons.length) % difficultyButtons.length;
-            syncActiveButton();
-            return;
-        }
-
-        if (event.key === "Home") {
-            event.preventDefault();
-            activeIndex = 0;
-            syncActiveButton();
-            return;
-        }
-
-        if (event.key === "End") {
-            event.preventDefault();
-            activeIndex = difficultyButtons.length - 1;
-            syncActiveButton();
-            return;
-        }
-
-        if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            const activeButton = difficultyButtons[activeIndex];
-            const difficulty = activeButton?.dataset.difficulty as Difficulty | undefined;
-            if (difficulty) startGameWithDifficulty(difficulty);
-        }
-    });
-
-    syncActiveButton();
-</script>
-
+    </script>
+</body>
 </html>
