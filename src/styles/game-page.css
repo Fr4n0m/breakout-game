@@ -31,8 +31,8 @@ body {
     inset: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: flex-start;
     gap: 14px;
     z-index: 2;
     color: #fff;
@@ -41,14 +41,14 @@ body {
 }
 
 .menu-logo {
-    width: min(96%, 920px);
+    width: 100%;
     height: auto;
-    margin-bottom: 10px;
+    margin: 0;
     filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
 }
 
 .menu-title {
-    margin: 0;
+    margin: 6px 0 0;
     font-size: clamp(16px, 2vw, 22px);
     font-weight: 900;
     letter-spacing: 2px;
@@ -58,11 +58,13 @@ body {
         0 0 8px rgba(111, 233, 255, 0.75),
         0 0 18px rgba(222, 92, 255, 0.65),
         0 2px 6px rgba(0, 0, 0, 0.85);
+    text-align: center;
 }
 
 .difficulty-buttons {
     display: flex;
     gap: 10px;
+    justify-content: center;
 }
 
 .difficulty-button {
