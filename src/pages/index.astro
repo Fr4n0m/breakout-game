@@ -155,10 +155,11 @@
 <img hidden id="sprite" src="/Breakout_Tile_Free.png" alt="Breakout sprite" loading="eager" decoding="sync">
 
 <script>
-    import { initBreakoutGame } from "../scripts/breakout/index.js";
+    import type { Difficulty } from "../scripts/breakout/config";
+    import { initBreakoutGame } from "../scripts/breakout/index";
 
-    const difficultyMenu = document.querySelector("#difficulty-menu");
-    const difficultyButtons = Array.from(document.querySelectorAll("[data-difficulty]"));
+    const difficultyMenu = document.querySelector<HTMLDivElement>("#difficulty-menu");
+    const difficultyButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-difficulty]"));
     let activeIndex = 1;
 
     function syncActiveButton() {
@@ -170,7 +171,7 @@
         });
     }
 
-    function startGameWithDifficulty(difficulty) {
+    function startGameWithDifficulty(difficulty: Difficulty) {
         initBreakoutGame({
             canvasSelector: "#game-canvas",
             spriteSelector: "#sprite",
@@ -184,7 +185,7 @@
 
     difficultyButtons.forEach((button, index) => {
         button.addEventListener("click", () => {
-            const difficulty = button.dataset.difficulty;
+            const difficulty = button.dataset.difficulty as Difficulty | undefined;
             if (!difficulty) return;
             activeIndex = index;
             syncActiveButton();
@@ -192,7 +193,7 @@
         });
     });
 
-    difficultyMenu?.addEventListener("keydown", (event) => {
+    difficultyMenu?.addEventListener("keydown", (event: KeyboardEvent) => {
         if (!difficultyButtons.length) return;
 
         if (event.key === "ArrowRight" || event.key === "ArrowDown") {
@@ -226,7 +227,7 @@
         if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             const activeButton = difficultyButtons[activeIndex];
-            const difficulty = activeButton?.dataset.difficulty;
+            const difficulty = activeButton?.dataset.difficulty as Difficulty | undefined;
             if (difficulty) startGameWithDifficulty(difficulty);
         }
     });

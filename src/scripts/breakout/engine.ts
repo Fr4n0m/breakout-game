@@ -1,20 +1,47 @@
-import { BROKEN_COLORS, BRICK_STATUS, CONFIG, KEY_BINDINGS, SPRITES } from "./config.js";
-import { createDimensions, createInitialState } from "./state.js";
+import {
+    BROKEN_COLORS,
+    BRICK_STATUS,
+    CONFIG,
+    DIFFICULTY_PRESETS,
+    KEY_BINDINGS,
+    SPRITES,
+    type Difficulty,
+    type SpriteKey
+} from "./config";
+import { createDimensions, createInitialState, type Dimensions, type GameState } from "./state";
 
-function clampSpeedWithDirection(value, min, max) {
+type GameOptions = {
+    difficulty?: Difficulty;
+};
+
+function clampSpeedWithDirection(value: number, min: number, max: number): number {
     const sign = Math.sign(value) || 1;
     const clampedMagnitude = Math.min(Math.max(Math.abs(value), min), max);
     return clampedMagnitude * sign;
 }
 
-export function createBreakoutGame(canvas, ctx, spriteSheet) {
+export function createBreakoutGame(
+    canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D,
+    spriteSheet: HTMLImageElement,
+    options: GameOptions = {}
+): { start: () => void } {
+    const difficulty: Difficulty = options.difficulty && DIFFICULTY_PRESETS[options.difficulty] ? options.difficulty : "normal";
+    const gameConfig = {
+        ...CONFIG,
+        ball: {
+            ...CONFIG.ball,
+            ...DIFFICULTY_PRESETS[difficulty]
+        }
+    };
+
     canvas.width = CONFIG.canvas.width;
     canvas.height = CONFIG.canvas.height;
 
-    const dimensions = createDimensions(SPRITES);
-    const state = createInitialState(canvas, dimensions);
+    const dimensions: Dimensions = createDimensions(SPRITES);
+    const state: GameState = createInitialState(canvas, dimensions, gameConfig.ball);
 
-    function drawSprite(spriteKey, x, y, width, height) {
+    function drawSprite(spriteKey: SpriteKey, x: number, y: number, width: number, height: number): void {
         const sprite = SPRITES[spriteKey];
         ctx.drawImage(
             spriteSheet,
@@ -29,15 +56,15 @@ export function createBreakoutGame(canvas, ctx, spriteSheet) {
         );
     }
 
-    function drawBall() {
+    function drawBall(): void {
         drawSprite("ball", state.ball.x, state.ball.y, state.ball.width, state.ball.height);
     }
 
-    function drawPaddle() {
+    function drawPaddle(): void {
         drawSprite("paddle", state.paddle.x, state.paddle.y, state.paddle.width, state.paddle.height);
     }
 
-    function drawBricks() {
+    function drawBricks(): void {
         for (let column = 0; column < CONFIG.bricks.columns; column++) {
             for (let row = 0; row < CONFIG.bricks.rows; row++) {
                 const brick = state.bricks[column][row];
@@ -48,11 +75,11 @@ export function createBreakoutGame(canvas, ctx, spriteSheet) {
         }
     }
 
-    function clearCanvas() {
+    function clearCanvas(): void {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
 
-    function drawGameOver() {
+    function drawGameOver(): void {
         ctx.font = "24px Arial";
         ctx.fillStyle = "#fff";
         ctx.textAlign = "center";
@@ -61,7 +88,7 @@ export function createBreakoutGame(canvas, ctx, spriteSheet) {
         ctx.fillText("Press any key to restart", canvas.width / 2, canvas.height / 2 + 30);
     }
 
-    function updateBrickCollisions() {
+    function updateBrickCollisions(): void {
         for (let column = 0; column < CONFIG.bricks.columns; column++) {
             for (let row = 0; row < CONFIG.bricks.rows; row++) {
                 const currentBrick = state.bricks[column][row];
@@ -79,28 +106,30 @@ export function createBreakoutGame(canvas, ctx, spriteSheet) {
                 if (currentBrick.hits === 1) {
                     currentBrick.status = BRICK_STATUS.DESTROYED;
                 } else {
-                    currentBrick.hits -= 1;
+                    currentBrick.hits = 1;
                     currentBrick.status = BRICK_STATUS.HIT;
-                    currentBrick.color = BROKEN_COLORS[currentBrick.color];
+                    if (currentBrick.color in BROKEN_COLORS) {
+                        currentBrick.color = BROKEN_COLORS[currentBrick.color as keyof typeof BROKEN_COLORS];
+                    }
                 }
             }
         }
     }
 
-    function updateBallMovement() {
+    function updateBallMovement(): void {
         const currentTime = performance.now();
         const deltaTime = (currentTime - state.game.lastTime) / 1000;
-        const accelerationFactor = 1 + CONFIG.ball.speedIncrement * deltaTime;
+        const accelerationFactor = 1 + gameConfig.ball.speedIncrement * deltaTime;
 
         state.ball.dx = clampSpeedWithDirection(
             state.ball.dx * accelerationFactor,
-            CONFIG.ball.minSpeed,
-            CONFIG.ball.maxSpeed
+            gameConfig.ball.minSpeed,
+            gameConfig.ball.maxSpeed
         );
         state.ball.dy = clampSpeedWithDirection(
             state.ball.dy * accelerationFactor,
-            CONFIG.ball.minSpeed,
-            CONFIG.ball.maxSpeed
+            gameConfig.ball.minSpeed,
+            gameConfig.ball.maxSpeed
         );
 
         state.game.lastTime = currentTime;
@@ -132,7 +161,7 @@ export function createBreakoutGame(canvas, ctx, spriteSheet) {
         state.ball.y += state.ball.dy;
     }
 
-    function updatePaddleMovement() {
+    function updatePaddleMovement(): void {
         if (state.input.rightPressed && state.paddle.x < canvas.width - state.paddle.width - 2) {
             state.paddle.x += CONFIG.paddle.sensitivity;
         } else if (state.input.leftPressed && state.paddle.x > 2) {
@@ -140,11 +169,11 @@ export function createBreakoutGame(canvas, ctx, spriteSheet) {
         }
     }
 
-    function resetGame() {
+    function resetGame(): void {
         document.location.reload();
     }
 
-    function onKeyDown(event) {
+    function onKeyDown(event: KeyboardEvent): void {
         const { key } = event;
         if (KEY_BINDINGS.right.has(key)) {
             state.input.rightPressed = true;
@@ -155,7 +184,7 @@ export function createBreakoutGame(canvas, ctx, spriteSheet) {
         }
     }
 
-    function onKeyUp(event) {
+    function onKeyUp(event: KeyboardEvent): void {
         const { key } = event;
         if (KEY_BINDINGS.right.has(key)) {
             state.input.rightPressed = false;
@@ -164,12 +193,12 @@ export function createBreakoutGame(canvas, ctx, spriteSheet) {
         }
     }
 
-    function initEvents() {
+    function initEvents(): void {
         document.addEventListener("keydown", onKeyDown);
         document.addEventListener("keyup", onKeyUp);
     }
 
-    function loop() {
+    function loop(): void {
         clearCanvas();
 
         if (!state.game.isOver) {
@@ -186,7 +215,7 @@ export function createBreakoutGame(canvas, ctx, spriteSheet) {
         drawGameOver();
     }
 
-    function start() {
+    function start(): void {
         initEvents();
         loop();
     }
