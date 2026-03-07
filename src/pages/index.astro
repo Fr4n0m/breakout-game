@@ -9,6 +9,7 @@ import "../styles/game-page.css";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breakout with JS</title>
     <link rel="icon" type="image/jpg" href="/favicon.png" />
+    <link rel="preload" href="/fonts/press-start-2p-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
     <div class="game-shell">
@@ -17,6 +18,10 @@ import "../styles/game-page.css";
             <DifficultyMenu />
         </div>
     </div>
+    <p class="site-credit">
+        Built by Fr4n0m
+        <a href="https://codebyfran.es" target="_blank" rel="noopener noreferrer">codebyfran.es</a>
+    </p>
 
     <img hidden id="sprite" src="/Breakout_Tile_Free.png" alt="Breakout sprite" loading="eager" decoding="sync">
 

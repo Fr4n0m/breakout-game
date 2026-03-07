@@ -85,11 +85,11 @@ export function createBreakoutGame(
     function drawEndScreen(): void {
         const title = state.game.isWon ? "You Win!" : "Game Over";
         const subtitle = state.game.isWon ? "Press any key to play again" : "Press any key to restart";
-        ctx.font = "24px Arial";
+        ctx.font = '18px "Press Start 2P"';
         ctx.fillStyle = "#fff";
         ctx.textAlign = "center";
         ctx.fillText(title, canvas.width / 2, canvas.height / 2);
-        ctx.font = "16px Arial";
+        ctx.font = '8px "Press Start 2P"';
         ctx.fillText(subtitle, canvas.width / 2, canvas.height / 2 + 30);
     }
 
