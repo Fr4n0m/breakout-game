@@ -170,9 +170,9 @@ textarea {
     box-sizing: border-box;
 }
 
-.site-credit {
+.site-credit,
+.site-contrib {
     position: fixed;
-    right: 16px;
     bottom: 14px;
     margin: 0;
     padding: 3px 6px;
@@ -195,7 +195,16 @@ textarea {
     z-index: 4;
 }
 
-.site-credit a {
+.site-credit {
+    right: 16px;
+}
+
+.site-contrib {
+    left: 16px;
+}
+
+.site-credit a,
+.site-contrib a {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     margin-left: 6px;
@@ -206,7 +215,9 @@ textarea {
 }
 
 .site-credit a:hover,
-.site-credit a:focus-visible {
+.site-credit a:focus-visible,
+.site-contrib a:hover,
+.site-contrib a:focus-visible {
     color: rgba(159, 245, 255, 0.92);
     border-color: rgba(255, 255, 255, 0.9);
     outline: none;
@@ -232,10 +243,16 @@ textarea {
         padding: 10px 9px;
     }
 
-    .site-credit {
-        right: 10px;
+    .site-credit,
+    .site-contrib {
         bottom: 10px;
+        right: 10px;
         padding: 3px 5px;
         font-size: 5px;
+    }
+
+    .site-contrib {
+        left: 10px;
+        right: auto;
     }
 }
