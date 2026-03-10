@@ -1,15 +1,31 @@
 # Breakout Atari Game
 
-Proyecto personal open source inspirado en el clásico **Breakout**, implementado con **Astro** y lógica de juego en **TypeScript** usando `canvas`.
+[![Astro](https://img.shields.io/badge/Astro-5A13EB?logo=astro&logoColor=white)](https://astro.build/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Canvas API](https://img.shields.io/badge/Canvas-API-1F2937)](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
+[![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+
+Proyecto open source inspirado en el clásico **Breakout**, desarrollado con **Astro** y lógica de juego en **TypeScript** usando `canvas`.
 
 ![breakout-game](https://github.com/Fr4n0m/breakout-game/assets/138864214/ae8feeca-dcf6-470a-9b58-f9c546944172)
 
-## Descripción
+## <img src="https://cdn.simpleicons.org/bookstack/111111" width="18" alt=""> Navegación rápida / Quick Navigation
+
+- [Español](#es)
+- [English](#en)
+
+---
+
+<a id="es"></a>
+## Español
+
+### <img src="https://cdn.simpleicons.org/aboutdotme/111111" width="18" alt=""> Descripción
 
 El objetivo es destruir todos los ladrillos rebotando la bola con la pala, evitando que la bola caiga fuera del área de juego.  
 La partida comienza con un menú de dificultad integrado dentro del propio canvas.
 
-## Funcionalidades
+### <img src="https://cdn.simpleicons.org/starship/111111" width="18" alt=""> Funcionalidades
 
 - Menú inicial de dificultad: `Fácil`, `Normal`, `Difícil`.
 - Velocidad de bola ajustada según dificultad.
@@ -20,22 +36,20 @@ La partida comienza con un menú de dificultad integrado dentro del propio canva
 - Diseño responsive sin scroll vertical.
 - Navegación por teclado en el menú de dificultad.
 
-## Controles
+### <img src="https://cdn.simpleicons.org/gamepad/111111" width="18" alt=""> Controles
 
 - Mover pala: `←` `→` o `A` `D`
-- Menú de dificultad:
-  - Navegar: `←` `→` (`↑` `↓` también)
-  - Confirmar: `Enter` o `Espacio`
+- Menú de dificultad: navegar con `←` `→` (también `↑` `↓`) y confirmar con `Enter` o `Espacio`
 - Reiniciar tras `Game Over`: cualquier tecla
 
-## Stack Técnico
+### <img src="https://cdn.simpleicons.org/stackblitz/111111" width="18" alt=""> Stack técnico
 
 - [Astro](https://astro.build/) (sitio y bundling)
 - TypeScript (lógica del juego)
 - Canvas API (renderizado)
 - ESLint (calidad de código)
 
-## Estructura del Proyecto
+### <img src="https://cdn.simpleicons.org/files/111111" width="18" alt=""> Estructura del proyecto
 
 ```text
 src/
@@ -49,7 +63,7 @@ src/
       index.ts
 ```
 
-## Instalación y Uso
+### <img src="https://cdn.simpleicons.org/npm/111111" width="18" alt=""> Instalación y uso
 
 ```bash
 npm install
@@ -58,7 +72,7 @@ npm run dev
 
 Abrir en navegador: `http://localhost:4321`
 
-## Scripts Disponibles
+### <img src="https://cdn.simpleicons.org/terminal/111111" width="18" alt=""> Scripts disponibles
 
 ```bash
 npm run dev        # entorno de desarrollo
@@ -68,7 +82,7 @@ npm run typecheck  # chequeo de tipos (astro check)
 npm run lint       # análisis estático de TypeScript
 ```
 
-## Calidad
+### <img src="https://cdn.simpleicons.org/checkmarx/111111" width="18" alt=""> Calidad
 
 Antes de subir cambios:
 
@@ -78,14 +92,99 @@ npm run lint
 npm run build
 ```
 
-## Roadmap (ideas)
+### <img src="https://cdn.simpleicons.org/git/111111" width="18" alt=""> Contribuciones
 
-- Sistema de puntuación y HUD en pantalla.
-- Niveles/patrones de ladrillos.
-- Efectos de sonido y música.
-- Pantalla de pausa y reanudación.
-- Guardado de récord local.
+Las contribuciones son bienvenidas. Si quieres mejorar el juego o proponer nuevas ideas:
 
-## Licencia
+- Abre un issue para discutir cambios grandes.
+- Envía un Pull Request con una descripción clara.
+- Mantén el estilo de código y pasa los checks (`typecheck`, `lint`, `build`).
 
-Este proyecto se distribuye bajo la licencia MIT. Consulta el archivo `LICENSE`.
+### <img src="https://cdn.simpleicons.org/opensourceinitiative/111111" width="18" alt=""> Licencia
+
+Este proyecto se distribuye bajo la licencia MIT. Consulta el archivo [LICENSE](./LICENSE).
+
+---
+
+<a id="en"></a>
+## English
+
+### <img src="https://cdn.simpleicons.org/aboutdotme/111111" width="18" alt=""> Description
+
+This open-source project is inspired by the classic **Breakout**, built with **Astro** and game logic in **TypeScript** using `canvas`.
+
+The goal is to destroy all bricks by bouncing the ball with the paddle while preventing the ball from falling outside the play area.  
+Each game starts with a difficulty menu rendered directly in the canvas.
+
+### <img src="https://cdn.simpleicons.org/starship/111111" width="18" alt=""> Features
+
+- Difficulty menu: `Easy`, `Normal`, `Hard`.
+- Ball speed adjusted by difficulty.
+- Progressive speed increase during gameplay.
+- Variable brick resistance (1 or 2 hits).
+- Visual states for damaged bricks.
+- `Game Over` message and keyboard restart.
+- Responsive layout with no vertical scroll.
+- Keyboard navigation in the difficulty menu.
+
+### <img src="https://cdn.simpleicons.org/gamepad/111111" width="18" alt=""> Controls
+
+- Move paddle: `←` `→` or `A` `D`
+- Difficulty menu: navigate with `←` `→` (`↑` `↓` also supported) and confirm with `Enter` or `Space`
+- Restart after `Game Over`: any key
+
+### <img src="https://cdn.simpleicons.org/stackblitz/111111" width="18" alt=""> Tech stack
+
+- [Astro](https://astro.build/) (site and bundling)
+- TypeScript (game logic)
+- Canvas API (rendering)
+- ESLint (code quality)
+
+### <img src="https://cdn.simpleicons.org/files/111111" width="18" alt=""> Project structure
+
+```text
+src/
+  pages/
+    index.astro
+  scripts/
+    breakout/
+      config.ts
+      state.ts
+      engine.ts
+      index.ts
+```
+
+### <img src="https://cdn.simpleicons.org/npm/111111" width="18" alt=""> Installation and usage
+
+```bash
+npm install
+npm run dev
+```
+
+Open in browser: `http://localhost:4321`
+
+### <img src="https://cdn.simpleicons.org/terminal/111111" width="18" alt=""> Available scripts
+
+```bash
+npm run dev        # development mode
+npm run build      # production build
+npm run preview    # preview production build
+npm run typecheck  # type check (astro check)
+npm run lint       # TypeScript static analysis
+```
+
+### <img src="https://cdn.simpleicons.org/git/111111" width="18" alt=""> Contributing
+
+Contributions are welcome. If you want to improve the game or propose new ideas:
+
+- Open an issue first for major changes.
+- Submit a Pull Request with a clear description.
+- Keep code style consistent and pass all checks (`typecheck`, `lint`, `build`).
+
+### <img src="https://cdn.simpleicons.org/opensourceinitiative/111111" width="18" alt=""> License
+
+This project is released under the MIT License. See [LICENSE](./LICENSE).
+
+---
+
+Portfolio: [Fr4n0m - codebyfran.es](https://codebyfran.es)
