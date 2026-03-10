@@ -10,7 +10,7 @@ Proyecto open source inspirado en el clásico **Breakout**, desarrollado con **A
 
 ![breakout-game](https://github.com/Fr4n0m/breakout-game/assets/138864214/ae8feeca-dcf6-470a-9b58-f9c546944172)
 
-## <img src="https://cdn.simpleicons.org/bookstack/111111" width="18" alt=""> Navegación rápida / Quick Navigation
+## 🌐 Navegación rápida / Quick Navigation
 
 - [Español](#es)
 - [English](#en)
@@ -18,14 +18,14 @@ Proyecto open source inspirado en el clásico **Breakout**, desarrollado con **A
 ---
 
 <a id="es"></a>
-## Español
+## 🇪🇸 Versión en español
 
-### <img src="https://cdn.simpleicons.org/aboutdotme/111111" width="18" alt=""> Descripción
+### 🎮 Descripción
 
 El objetivo es destruir todos los ladrillos rebotando la bola con la pala, evitando que la bola caiga fuera del área de juego.  
 La partida comienza con un menú de dificultad integrado dentro del propio canvas.
 
-### <img src="https://cdn.simpleicons.org/starship/111111" width="18" alt=""> Funcionalidades
+### ✨ Funcionalidades
 
 - Menú inicial de dificultad: `Fácil`, `Normal`, `Difícil`.
 - Velocidad de bola ajustada según dificultad.
@@ -36,20 +36,20 @@ La partida comienza con un menú de dificultad integrado dentro del propio canva
 - Diseño responsive sin scroll vertical.
 - Navegación por teclado en el menú de dificultad.
 
-### <img src="https://cdn.simpleicons.org/gamepad/111111" width="18" alt=""> Controles
+### 🎯 Controles
 
 - Mover pala: `←` `→` o `A` `D`
 - Menú de dificultad: navegar con `←` `→` (también `↑` `↓`) y confirmar con `Enter` o `Espacio`
 - Reiniciar tras `Game Over`: cualquier tecla
 
-### <img src="https://cdn.simpleicons.org/stackblitz/111111" width="18" alt=""> Stack técnico
+### 🧰 Stack técnico
 
 - [Astro](https://astro.build/) (sitio y bundling)
 - TypeScript (lógica del juego)
 - Canvas API (renderizado)
 - ESLint (calidad de código)
 
-### <img src="https://cdn.simpleicons.org/files/111111" width="18" alt=""> Estructura del proyecto
+### 🗂️ Estructura del proyecto
 
 ```text
 src/
@@ -63,7 +63,7 @@ src/
       index.ts
 ```
 
-### <img src="https://cdn.simpleicons.org/npm/111111" width="18" alt=""> Instalación y uso
+### ⚙️ Instalación y uso
 
 ```bash
 npm install
@@ -72,7 +72,7 @@ npm run dev
 
 Abrir en navegador: `http://localhost:4321`
 
-### <img src="https://cdn.simpleicons.org/terminal/111111" width="18" alt=""> Scripts disponibles
+### 📜 Scripts disponibles
 
 ```bash
 npm run dev        # entorno de desarrollo
@@ -82,7 +82,7 @@ npm run typecheck  # chequeo de tipos (astro check)
 npm run lint       # análisis estático de TypeScript
 ```
 
-### <img src="https://cdn.simpleicons.org/checkmarx/111111" width="18" alt=""> Calidad
+### 🧪 Calidad
 
 Antes de subir cambios:
 
@@ -92,7 +92,7 @@ npm run lint
 npm run build
 ```
 
-### <img src="https://cdn.simpleicons.org/git/111111" width="18" alt=""> Contribuciones
+### 🤝 Contribuciones
 
 Las contribuciones son bienvenidas. Si quieres mejorar el juego o proponer nuevas ideas:
 
@@ -100,23 +100,23 @@ Las contribuciones son bienvenidas. Si quieres mejorar el juego o proponer nueva
 - Envía un Pull Request con una descripción clara.
 - Mantén el estilo de código y pasa los checks (`typecheck`, `lint`, `build`).
 
-### <img src="https://cdn.simpleicons.org/opensourceinitiative/111111" width="18" alt=""> Licencia
+### 📄 Licencia
 
 Este proyecto se distribuye bajo la licencia MIT. Consulta el archivo [LICENSE](./LICENSE).
 
 ---
 
 <a id="en"></a>
-## English
+## 🇬🇧 English version
 
-### <img src="https://cdn.simpleicons.org/aboutdotme/111111" width="18" alt=""> Description
+### 🎮 Description
 
 This open-source project is inspired by the classic **Breakout**, built with **Astro** and game logic in **TypeScript** using `canvas`.
 
 The goal is to destroy all bricks by bouncing the ball with the paddle while preventing the ball from falling outside the play area.  
 Each game starts with a difficulty menu rendered directly in the canvas.
 
-### <img src="https://cdn.simpleicons.org/starship/111111" width="18" alt=""> Features
+### ✨ Features
 
 - Difficulty menu: `Easy`, `Normal`, `Hard`.
 - Ball speed adjusted by difficulty.
@@ -127,20 +127,20 @@ Each game starts with a difficulty menu rendered directly in the canvas.
 - Responsive layout with no vertical scroll.
 - Keyboard navigation in the difficulty menu.
 
-### <img src="https://cdn.simpleicons.org/gamepad/111111" width="18" alt=""> Controls
+### 🎯 Controls
 
 - Move paddle: `←` `→` or `A` `D`
 - Difficulty menu: navigate with `←` `→` (`↑` `↓` also supported) and confirm with `Enter` or `Space`
 - Restart after `Game Over`: any key
 
-### <img src="https://cdn.simpleicons.org/stackblitz/111111" width="18" alt=""> Tech stack
+### 🧰 Tech stack
 
 - [Astro](https://astro.build/) (site and bundling)
 - TypeScript (game logic)
 - Canvas API (rendering)
 - ESLint (code quality)
 
-### <img src="https://cdn.simpleicons.org/files/111111" width="18" alt=""> Project structure
+### 🗂️ Project structure
 
 ```text
 src/
@@ -154,7 +154,7 @@ src/
       index.ts
 ```
 
-### <img src="https://cdn.simpleicons.org/npm/111111" width="18" alt=""> Installation and usage
+### ⚙️ Installation and usage
 
 ```bash
 npm install
@@ -163,7 +163,7 @@ npm run dev
 
 Open in browser: `http://localhost:4321`
 
-### <img src="https://cdn.simpleicons.org/terminal/111111" width="18" alt=""> Available scripts
+### 📜 Available scripts
 
 ```bash
 npm run dev        # development mode
@@ -173,7 +173,7 @@ npm run typecheck  # type check (astro check)
 npm run lint       # TypeScript static analysis
 ```
 
-### <img src="https://cdn.simpleicons.org/git/111111" width="18" alt=""> Contributing
+### 🤝 Contributing
 
 Contributions are welcome. If you want to improve the game or propose new ideas:
 
@@ -181,7 +181,7 @@ Contributions are welcome. If you want to improve the game or propose new ideas:
 - Submit a Pull Request with a clear description.
 - Keep code style consistent and pass all checks (`typecheck`, `lint`, `build`).
 
-### <img src="https://cdn.simpleicons.org/opensourceinitiative/111111" width="18" alt=""> License
+### 📄 License
 
 This project is released under the MIT License. See [LICENSE](./LICENSE).
 
